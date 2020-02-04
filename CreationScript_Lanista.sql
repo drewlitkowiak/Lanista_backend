@@ -2,8 +2,8 @@ create database if not exists lanista;
 use lanista;
 
 create table if not exists videos (
+	video_id INT NOT NULL UNIQUE,
 	creator INT NOT NULL,
-    link INT NOT NULL,
     age_restriction INT,
     genre INT NOT NULL,
     title VARCHAR(255),
@@ -17,5 +17,22 @@ create table if not exists videos (
 		DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
     data_change TIMESTAMP NOT NULL
-		DEFAULT CURRENT_TIMESTAMP
+		DEFAULT CURRENT_TIMESTAMP,
+        
+	INDEX (creator, age_restriction, genre, availability),
+    
+	PRIMARY KEY (video_id)
 );
+
+INSERT INTO videos(video_id, creator, age_restriction, genre, title,
+                    runtime, advertisement, comments_enabled, stream,
+                    availability, upload_date, meta_change, data_change)
+			VALUES(0, 0, 0, 0, "example-0",
+			0, 0, true, false,
+            0, 0, default, default),
+		(1, 0, 0, 0, "example-1",
+		0, 0, true, false,
+		0, 0, default, default);
+            
+            
+SELECT * FROM videos;

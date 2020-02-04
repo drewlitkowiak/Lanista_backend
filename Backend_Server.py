@@ -31,11 +31,6 @@ def start():
         return None, None
 
     finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            if verbosity == 1:
-                print("MySQL connection is closed.")
         return connection, cursor
 
 
