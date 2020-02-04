@@ -1,6 +1,7 @@
 import flask
 from flask import request, jsonify
 import Backend_Server as backend
+from Videos import Videos
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -48,12 +49,13 @@ def videos_request():
 
     result = cursor.fetchone()
     print(result)
-    print(result.toString())
+
+    video = Videos((*result))
 
     cursor.close()
     connection.close()
 
-    return jsonify(result)
+    return jsonify(video.serialize())
 
 
 if __name__ == '__main__':
