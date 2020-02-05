@@ -43,12 +43,13 @@ def videos_request():
 
     connection, cursor = backend.start()
     if connection is None or cursor is None:
-        authentication_error_html(401)
+        return authentication_error_html(401)
 
     cursor.execute("SELECT * FROM videos WHERE video_id = %s;", (video_id, ))
 
     result = cursor.fetchone()
-    print(result)
+    if result is None:
+        return page_not_found(404)
 
     video = Videos((*result))
 

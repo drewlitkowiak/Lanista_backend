@@ -1,6 +1,7 @@
 create database if not exists lanista;
 use lanista;
 
+
 create table if not exists videos (
 	video_id INT NOT NULL UNIQUE,
 	creator INT NOT NULL,
